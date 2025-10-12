@@ -9,6 +9,7 @@ license = "Apache-2.0"
 [dependencies]
 # Async runtime
 tokio = { version = "1.47.1", features = ["full"] }
+tokio-stream = "0.1"
 
 # HTTP client
 reqwest = { version = "0.12.23", features = ["json", "cookies", "stream"] }
@@ -51,6 +52,8 @@ image = "0.25.8"
 axum = { version = "0.8.6", features = ["json", "macros"] }
 tower = "0.5.2"
 tower-http = { version = "0.6.6", features = ["cors"] }
+futures = "0.3"
+async-stream = "0.3"
 
 # Regular expressions
 regex = "1.12.1"
