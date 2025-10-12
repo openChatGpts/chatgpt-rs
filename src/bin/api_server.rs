@@ -8,13 +8,17 @@ fn print_usage() {
     println!("Options:");
     println!("  --host <HOST>      Server host (default: 0.0.0.0)");
     println!("  --port <PORT>      Server port (default: 6969)");
-    println!("  --proxy <PROXY>    Default proxy URL (default: http://127.0.0.1:1082)");
+    println!("  --proxy <PROXY>    Default proxy for ChatGPT client (default: http://127.0.0.1:1082)");
+    println!("  --no-proxy         Don't use any default proxy");
     println!("  --help             Show this help message");
+    println!();
+    println!("Note: Proxy can also be overridden per-request in the API payload.");
     println!();
     println!("Examples:");
     println!("  api_server");
     println!("  api_server --port 8080");
-    println!("  api_server --proxy http://proxy.example.com:8080");
+    println!("  api_server --proxy http://127.0.0.1:7890");
+    println!("  api_server --no-proxy");
     println!("  api_server --host 127.0.0.1 --port 8080 --proxy http://localhost:7890");
 }
 
@@ -108,11 +112,6 @@ async fn main() {
         log_info!("Default Proxy: None");
     }
     
-    log_info!("================================");
-    log_info!("Endpoints:");
-    log_info!("  POST /v1/chat/completions - OpenAI-compatible chat completions");
-    log_info!("================================");
-
     if let Err(err) = server::run(&host, port, default_proxy).await {
         log_error!("API server failed: {}", err);
         std::process::exit(1);
